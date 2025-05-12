@@ -1,6 +1,6 @@
-import fastifyPlugin from "fastify-plugin";
 
-const tmp = function(app, opts, done) {
+
+export default function(app, opts, done) {
     const todos = [
         {
             id: 1,
@@ -17,5 +17,3 @@ const tmp = function(app, opts, done) {
     app.decorate('todos', todos);
     done();
 }
-
-export default fastifyPlugin(tmp);
