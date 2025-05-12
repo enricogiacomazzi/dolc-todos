@@ -1,0 +1,18 @@
+meta {
+  name: edit todos by id 2
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:6060/todos/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": 2,
+    "text": "studiare C#"
+  }
+}
