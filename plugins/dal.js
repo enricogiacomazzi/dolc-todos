@@ -5,7 +5,8 @@ export default function(app, opts, done) {
         {
             id: 1,
             text: 'fare la spesa',
-            completed: false
+            completed: false,
+            secret: 'my super secret'
         },
         {
             id: 2,
