@@ -12,10 +12,14 @@ export default async function(app, opts) {
 
     app.post('/', {schema}, async (req, res) => {
         const newTodo = req.body;
-        const id = Math.max(...app.todos.map(t => t.id), 0) + 1;
-        newTodo.id = id;
-        app.todos.push(newTodo);
-    
-        return newTodo;
+        const result = await app.pg.query(`
+            INSERT INTO todos (text, completed)
+            VALUES ($1, $2)
+            RETURNING id;    
+        `, [newTodo.text, newTodo.completed]);
+
+        const id = result.rows[0].id;
+        const result2 = await app.pg.query('SELECT * from todos WHERE id = $1', [id]);
+        return result2.rows[0];
     });
 }

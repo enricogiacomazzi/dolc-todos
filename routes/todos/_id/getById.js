@@ -3,8 +3,7 @@
 export default async function(app, opts) {
     app.get('/', async (req, res) => {
         const id = Number(req.params.id);
-        console.log(id);
-        const todo = app.todos.find(t => t.id === id);
-        return todo ?? res.notFound();
+        const result = await app.pg.query('SELECT * from todos WHERE id = $1', [id]);
+        return result.rowCount > 0 ? result.rows[0] : res.notFound();
     });
 }

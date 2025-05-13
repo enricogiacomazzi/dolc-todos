@@ -1,4 +1,5 @@
 
+import fastifyPostgres from '@fastify/postgres';
 
 export default function(app, opts, done) {
     const todos = [
@@ -15,6 +16,10 @@ export default function(app, opts, done) {
         }
     ];
     
+    app.register(fastifyPostgres, {
+        connectionString: 'postgres://postgres:password@localhost/dolc'
+    });
+
     app.decorate('todos', todos);
     done();
 }

@@ -11,6 +11,7 @@ const app = fastify({
     logger: true
 });
 
+
 await app.register(autoLoad, {
     dir: join(__dirname, 'plugins'),
     encapsulate: false

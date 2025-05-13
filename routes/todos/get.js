@@ -15,6 +15,7 @@ export default async function(app, opts) {
     }
 
     app.get('/', { schema }, async (req, res) => {
-        return app.todos;
+        const result = await app.pg.query('SELECT * from todos');
+        return result.rows;
     });
 }
